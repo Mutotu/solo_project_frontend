@@ -1,0 +1,53 @@
+.homepage {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-image {
+  width: 12rem;
+  height: 12rem;
+  display: inline-block;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.homepage::after {
+  content: "";
+  background-image: url("https://www.cardosystems.com/wp-content/uploads/2019/11/Motorcycle-ride-through-mountains.jpg");
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-repeat: no-repeat;
+}
+
+.userAddEvent {
+  display: flex;
+  flex-direction: column;
+}
+
+.eventCard {
+  /* border: black 2px solid; */
+  max-width: 350px;
+  height: auto;
+  background-color: rgb(240, 233, 222);
+  opacity: 0.7;
+  border-radius: 1rem;
+}
+
+.h1 {
+  margin-right: 800px;
+}
+
+.eventName {
+  text-decoration: underline;
+}
+
+.profile-image:hover {
+  border: 0.5rem rgb(95, 129, 27) solid;
+}

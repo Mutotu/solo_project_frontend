@@ -1,0 +1,27 @@
+.eventItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(92, 149, 153);
+  width: 1000px;
+  height: auto;
+  padding: 2rem;
+}
+
+.btn {
+  height: 100px;
+  width: 120px;
+  border-radius: 200px;
+  margin-bottom: 15px;
+}
+
+.btn:hover {
+  background-image: url("../../../old-crew-cafe-racer.gif");
+  background-size: 100px;
+  width: 120px;
+  height: 100px;
+  border: 2px solid;
+  color: pink;
+  cursor: pointer;
+  font-weight: bold;
+}
