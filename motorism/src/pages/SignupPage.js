@@ -1,5 +1,5 @@
 import axios from "axios";
-// import env from 'react-dotenv';
+import env from "react-dotenv";
 import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,8 @@ const SignupPage = (props) => {
   }
   async function submitSignup(e) {
     e.preventDefault();
-    const response = await axios.post(`http://localhost:3001/user/signup`, {
+    // const response = await axios.post(`http://localhost:3001/user/signup`, {
+    const response = await axios.post(`${env.BACKEND_URL}/user/signup`, {
       username: signupInfo.username,
       email: signupInfo.email,
       password: signupInfo.password,

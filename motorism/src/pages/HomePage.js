@@ -2,6 +2,7 @@ import "../pages/cssFiles/HomePage.css";
 import { AppContext } from "../context/AppContext";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
+import env from "react-dotenv";
 
 const HomePage = (props) => {
   const { userState } = useContext(AppContext);
@@ -16,8 +17,10 @@ const HomePage = (props) => {
   const [bool, setBool] = useState(false);
 
   const getUserCreatedEvents = async () => {
+    // const events = await axios.get(
+    //   "http://localhost:3001/events/getUserEvents",
     const events = await axios.get(
-      "http://localhost:3001/events/getUserEvents",
+      `${env.BACKEND_URL}/events/getUserEvents`,
 
       {
         headers: {
@@ -28,13 +31,15 @@ const HomePage = (props) => {
       }
     );
     setUserAddEvent(events.data.events);
-    console.log(events.data.events);
+    // console.log(events.data.events);
   };
   // getUserCreatedEvents();
   const updatePhoto = async () => {
     if (profilePhoto.startsWith("http")) {
+      // const update = await axios.put(
+      //   "http://localhost:3001/user/update",
       const update = await axios.put(
-        "http://localhost:3001/user/update",
+        `${env.BACKEND_URL}/user/update`,
         {},
 
         {

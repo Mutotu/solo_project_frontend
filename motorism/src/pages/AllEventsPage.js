@@ -148,6 +148,7 @@ import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import EventItem from "../components/jsFiles/EventItem";
 import { useNavigate } from "react-router-dom";
+import env from "react-dotenv";
 
 const AllEventsPage = (props) => {
   const [events, setEvents] = useState([]);
@@ -158,7 +159,8 @@ const AllEventsPage = (props) => {
 
   ///
   const getEvents = async () => {
-    const response = await axios.get("http://localhost:3001/events/getall");
+    // const response = await axios.get("http://localhost:3001/events/getall");
+    const response = await axios.get(`${env.BACKEND_URL}/events/getall`);
     setEvents(response.data.allevents);
 
     // filterEvents();
@@ -184,8 +186,10 @@ const AllEventsPage = (props) => {
     setCollectId([temp]);
 
     if (id) {
+      // const saveEvent = await axios.post(
+      //   `http://localhost:3001/events/save/${id}`,
       const saveEvent = await axios.post(
-        `http://localhost:3001/events/save/${id}`,
+        `${env.BACKEND_URL}/events/save/${id}`,
         {},
 
         {

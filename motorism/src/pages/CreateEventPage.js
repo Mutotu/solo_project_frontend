@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
+import env from "react-dotenv";
 
 const CreateEventPage = (props) => {
   // const { eventState } = useContext(AppContext);
@@ -17,10 +18,12 @@ const CreateEventPage = (props) => {
   const submitEventInfo = async (e) => {
     e.preventDefault();
 
+    // axios
+    //   .post(
+    //     "http://localhost:3001/events/create",
     axios
       .post(
-        "http://localhost:3001/events/create",
-
+        `${env.BACKEND_URL}/events/create`,
         {
           name: name,
           city: city,

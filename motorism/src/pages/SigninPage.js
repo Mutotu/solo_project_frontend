@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
+import env from "react-dotenv";
 
 const SigninPage = (props) => {
   const defaultLoginInfo = {
@@ -23,7 +24,8 @@ const SigninPage = (props) => {
   async function submitLogin(e) {
     e.preventDefault();
 
-    const response = await axios.post(`http://localhost:3001/user/signin`, {
+    // const response = await axios.post(`http://localhost:3001/user/signin`, {
+    const response = await axios.post(`${env.BACKEND_URL}/user/signin`, {
       email: loginInfo.email,
       password: loginInfo.password,
     });
