@@ -140,27 +140,49 @@
 // };
 
 // export default AllEventsPage;
-////////////////////////////////////////
-
+//////////////////////////////////////
+//////
 import "./cssFiles/AllEventsPage.css";
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/AppContext";
-// import { useParams } from "react-router-dom";
 import EventItem from "../components/jsFiles/EventItem";
+import { useNavigate } from "react-router-dom";
 
 const AllEventsPage = (props) => {
   const [events, setEvents] = useState([]);
   const { idState } = useContext(AppContext);
   const [collectId, setCollectId] = idState;
-  // const [bool, setBool] = useState(false);
-  console.log(collectId);
+  // const [attendees, setAttendees] = useState(0);
+  const navigation = useNavigate();
+
+  ///
   const getEvents = async () => {
     const response = await axios.get("http://localhost:3001/events/getall");
     setEvents(response.data.allevents);
-  };
 
+    // filterEvents();
+  };
+  // const getAttendeeNumber = async (id) => {
+  //   const response = await axios.get(
+  //     `http://localhost:3001/events/attendee/${id}`,
+  //     {},
+
+  //     {
+  //       headers: {
+  //         "content-type": "application/JSON",
+  //         Authorization: localStorage.getItem("userId"),
+  //         attendees: attendees + 1,
+  //       },
+  //     }
+  //   );
+  //   console.log(response);
+  // };
   const handleAddEventClick = async (id) => {
+    let temp = {};
+    temp[id] = true;
+    setCollectId([temp]);
+
     if (id) {
       const saveEvent = await axios.post(
         `http://localhost:3001/events/save/${id}`,
@@ -174,26 +196,15 @@ const AllEventsPage = (props) => {
         }
       );
     }
+    ///if not other option to load the page then keep this
+    // window.location.reload();
 
+    navigation("/myevents");
     getEvents();
   };
   ////////
   //////////// after creating a new even page allevenspage doesnt update itself
   ///////
-
-  //////can't get it to disable!!
-
-  // const filterEvents = (id) => {
-  //   let compare = [];
-  //   for (let i = 0; i < collectId.length; i++) {
-  //     compare.push(Object.keys(collectId[i]));
-  //   }
-  //   compare = compare.flat();
-  //   if (compare.includes(String(id))) {
-  //     // console.log(compare.includes(String(id)));
-  //     setBool(true);
-  //   }
-  // };
 
   ////gettin all the ids from myevents page and use them againist events ids.
   //If the ids match then don't show the event on this page
@@ -203,22 +214,26 @@ const AllEventsPage = (props) => {
       let myEvents = [];
       for (let i = 0; i < collectId.length; i++) {
         myEvents.push(Object.keys(collectId[i]));
+        // console.log(Object.keys(collectId[i]));
       }
 
       myEvents = myEvents.flat();
-
+      // console.log(myEvents);
       if (!myEvents.includes(String(ev.id))) {
         filteredEvent.push(ev);
         // console.log(filteredEvent);
       }
     });
+    // console.log(filteredEvent);
+    return filteredEvent;
   };
+
   filterEvents();
-  useEffect(() => {}, [events]);
+
   useEffect(() => {
     getEvents();
   }, []);
-
+  // console.log("test");
   const createEventItem = () => {
     // return events.map((ev, i) => {
     return filteredEvent.map((ev, i) => {
@@ -231,11 +246,14 @@ const AllEventsPage = (props) => {
             state={ev.state}
             date={ev.date}
             details={ev.details}
+            // attendees={attendees}
           />
           <button
             className='btn'
             onClick={() => {
+              // setAttendees(ev.attendees);
               handleAddEventClick(ev.id);
+              // getAttendeeNumber(ev.id);
             }}
           >
             Add

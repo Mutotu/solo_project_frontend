@@ -179,7 +179,7 @@ const MyEvents = (props) => {
     setCollectId(idCollector);
     // idCollector = [];
   };
-  console.log(collectId);
+  // console.log(collectId);
   useEffect(() => {
     extractId();
   }, [events]);
@@ -230,7 +230,11 @@ const MyEvents = (props) => {
   return (
     <div>
       My Events
-      {events.length === 0 ? <h3>loading...</h3> : <ul>{displayEvents()}</ul>}
+      {events.length === 0 ? (
+        <h3>You have no events saved</h3>
+      ) : (
+        <ul>{displayEvents()}</ul>
+      )}
     </div>
   );
 };

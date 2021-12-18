@@ -46,10 +46,11 @@ const HomePage = (props) => {
         }
       );
       // console.log(update);
+      // setProfilePhoto(update.data.updating.bike_type);
       setDisplay(false);
+      //if not other solution to refresh the page, keep the  code below
+      window.location.reload();
     }
-
-    // setProfilePhoto(update.data.updating.bike_type);
   };
   // console.log(user);
   const displayUserAddEvents = () => {
