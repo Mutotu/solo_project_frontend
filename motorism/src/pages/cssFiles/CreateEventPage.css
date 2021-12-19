@@ -1,0 +1,13 @@
+.myForm {
+  display: flex;
+  flex-direction: column;
+}
+
+div > input {
+  margin: 20px;
+  height: 2rem;
+  width: 20rem;
+}
+body {
+  background-color: rgb(184, 182, 182);
+}

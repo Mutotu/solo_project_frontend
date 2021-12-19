@@ -33,15 +33,21 @@
 
 .eventCard {
   /* border: black 2px solid; */
-  max-width: 350px;
+  width: 350px;
   height: auto;
   background-color: rgb(240, 233, 222);
   opacity: 0.7;
   border-radius: 1rem;
+  margin: auto;
 }
 
 .h1 {
-  margin-right: 800px;
+  margin: auto;
+  border-top: 5px gray solid;
+  border-left: 5px gray solid;
+  border-right: 5px gray solid;
+  border-radius: 1rem;
+  width: 350px;
 }
 
 .eventName {
@@ -50,4 +56,8 @@
 
 .profile-image:hover {
   border: 0.5rem rgb(95, 129, 27) solid;
+}
+
+.display {
+  margin-right: 63rem;
 }

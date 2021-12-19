@@ -17,24 +17,26 @@ const HomePage = (props) => {
   const [bool, setBool] = useState(false);
 
   const getUserCreatedEvents = async () => {
-    // const events = await axios.get(
-    //   "http://localhost:3001/events/getUserEvents",
-    const events = await axios.get(
-      `${env.BACKEND_URL}/events/getUserEvents`,
+    if (localStorage.userId) {
+      // const events = await axios.get(
+      //   "http://localhost:3001/events/getUserEvents",
+      const events = await axios.get(
+        `${env.BACKEND_URL}/events/getUserEvents`,
 
-      {
-        headers: {
-          "content-type": "application/JSON",
-          Authorization: localStorage.getItem("userId"),
-          bike_type: profilePhoto,
-        },
-      }
-    );
-    setUserAddEvent(events.data.events);
-    // console.log(events.data.events);
+        {
+          headers: {
+            "content-type": "application/JSON",
+            Authorization: localStorage.getItem("userId"),
+            bike_type: profilePhoto,
+          },
+        }
+      );
+      setUserAddEvent(events.data.events);
+    }
   };
-  // getUserCreatedEvents();
+
   const updatePhoto = async () => {
+    user.bike_type = profilePhoto;
     if (profilePhoto.startsWith("http")) {
       // const update = await axios.put(
       //   "http://localhost:3001/user/update",
@@ -50,14 +52,11 @@ const HomePage = (props) => {
           },
         }
       );
-      // console.log(update);
-      // setProfilePhoto(update.data.updating.bike_type);
+
       setDisplay(false);
-      //if not other solution to refresh the page, keep the  code below
-      window.location.reload();
     }
   };
-  // console.log(user);
+
   const displayUserAddEvents = () => {
     return userAddEvent.map((ev, i) => {
       return (
@@ -74,11 +73,9 @@ const HomePage = (props) => {
       );
     });
   };
-  const displayUser = () => {
+  const displayImage = () => {
     return (
-      <div className='homepage'>
-        <h1>Welcome, {user.username}</h1>
-
+      <>
         <img
           className='profile-image'
           src={user.bike_type ? user.bike_type : defaultPhoto}
@@ -87,9 +84,18 @@ const HomePage = (props) => {
             setDisplay(true);
           }}
         ></img>
+      </>
+    );
+  };
+  const displayUser = () => {
+    return (
+      <div className='homepage'>
+        <h1>Welcome, {user.username}</h1>
+
+        {displayImage()}
         <div>
           {display ? (
-            <div>
+            <div className='display'>
               <input
                 name='profilePhoto'
                 type='text'
@@ -100,6 +106,7 @@ const HomePage = (props) => {
                 }}
               />
               <button
+                className='display-button'
                 onClick={() => {
                   updatePhoto();
                 }}
@@ -107,6 +114,7 @@ const HomePage = (props) => {
                 Upload
               </button>
               <button
+                className='display-button'
                 onClick={() => {
                   setDisplay(false);
                 }}
@@ -119,23 +127,20 @@ const HomePage = (props) => {
       </div>
     );
   };
-  // updatePhoto();
+
   useEffect(() => {
-    updatePhoto();
-  }, []);
+    displayImage();
+  }, [updatePhoto]);
   useEffect(() => {
     getUserCreatedEvents();
   }, []);
   return (
     <>
-      <div>
-        HomePage
-        {user.id ? displayUser() : <h2>Signin/Signup</h2>}
-      </div>
+      <div>{user.id ? displayUser() : <h2>Signin/Signup</h2>}</div>
       <div>
         {userAddEvent.length !== 0 ? (
           <>
-            <h1 className='h1'>Events ({user.username}) created: </h1>
+            <h1 className='h1'>Events You created </h1>
             {displayUserAddEvents()}
           </>
         ) : null}

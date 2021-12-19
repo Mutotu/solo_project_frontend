@@ -4,14 +4,35 @@ const EventItem = (props) => {
   return (
     <div>
       <div className='eventItem'>
-        <h2>Name of Event: {props.name}</h2>
-        <h3>Type of Ride: {props.type}</h3>
-        <h4>Which city: {props.city}</h4>
-        <h4>Which state: {props.state}</h4>
-        <h4>When: {props.date}</h4>
-        <h4>Details: {props.details}</h4>
+        <h2>
+          <span>Name of Event:</span> <br></br>
+          {props.name}
+        </h2>
+        <h3>
+          <span>Type of Ride: </span> <br></br>
+          {props.type}
+        </h3>
+        <h4>
+          <span>Which city: </span>
+          <br></br>
+          {props.city}
+        </h4>
+        <h4>
+          <span>Which state:</span> <br></br>
+          {props.state}
+        </h4>
+        <h4>
+          <span>When: </span>
+          <br></br>
+          {props.date}
+        </h4>
+        <h4>
+          <span>Details: </span>
+          <br></br>
+          {props.details}
+        </h4>
       </div>
-      {/* <h3>Number of attendees: {props.attendees}</h3> */}
+      <h3>Number of attendees: {props.attendees > 0 ? props.attendees : 0}</h3>
     </div>
   );
 };

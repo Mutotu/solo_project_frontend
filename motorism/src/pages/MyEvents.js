@@ -8,6 +8,8 @@ const MyEvents = (props) => {
   const [events, setEvents] = useState([]);
   const { idState } = useContext(AppContext);
   const [collectId, setCollectId] = idState;
+  const [organizerInfo, setOrganizerInfo] = useState([]);
+  const [load, setLoad] = useState(true);
 
   const getMyEvents = async () => {
     // const myEvents = await axios.get("http://localhost:3001/events/getsaves", {
@@ -19,23 +21,9 @@ const MyEvents = (props) => {
     });
 
     setEvents(myEvents.data.savedEvents);
+    setLoad(false);
+  };
 
-    extractId();
-  };
-  let idCollector = [];
-  const extractId = () => {
-    for (let i of events) {
-      let id = {};
-      id[i.id] = true;
-      idCollector.push(id);
-    }
-    setCollectId(idCollector);
-    // idCollector = [];
-  };
-  // console.log(collectId);
-  useEffect(() => {
-    extractId();
-  }, [events]);
   const deleteEvent = async (id) => {
     if (id) {
       // const deletedEvent = await axios.delete(
@@ -50,17 +38,14 @@ const MyEvents = (props) => {
         }
       );
     }
-
-    getMyEvents();
+    setLoad(true);
   };
 
   const displayEvents = () => {
     return events.map((ev, i) => {
       return (
         <div>
-          <a href='mailto:email@example.com'>
-            Send Email to the Organizer (UserName)
-          </a>
+          <a href='mailto:email@example.com'>Send Email to the Organizer</a>
           <div key={ev.id} className='event-card-li'>
             <li>Name of Event: {ev.name}</li>
             <li>City: {ev.city}</li>
@@ -72,8 +57,6 @@ const MyEvents = (props) => {
               className='event-card-btn'
               onClick={() => {
                 deleteEvent(ev.id);
-
-                // console.log("button");
               }}
             >
               Remove
@@ -85,8 +68,10 @@ const MyEvents = (props) => {
   };
 
   useEffect(() => {
-    getMyEvents();
-  }, []);
+    if (load) {
+      getMyEvents();
+    }
+  }, [deleteEvent]);
 
   return (
     <div>

@@ -1,75 +1,3 @@
-// import { useNavigate } from "react-router-dom";
-
-// import { AppContext } from "../../context/AppContext";
-// import { useContext } from "react";
-
-// const Header = (props) => {
-//   const navigation = useNavigate();
-//   const { userState } = useContext(AppContext);
-//   const [user, setUser] = userState;
-
-//   return (
-//     <div>
-//       <h1> Motorcycle Trips</h1>
-//       <nav className='NavBar'>
-//         <button
-//           onClick={() => {
-//             navigation("/");
-//           }}
-//         >
-//           Home
-//         </button>
-
-//         <button
-//           onClick={() => {
-//             navigation("/signin");
-//           }}
-//         >
-//           Signin
-//         </button>
-//         <button
-//           onClick={() => {
-//             navigation("/signup");
-//           }}
-//         >
-//           Signup
-//         </button>
-//         <button
-//           onClick={() => {
-//             navigation("/allevents");
-//           }}
-//         >
-//           All Events
-//         </button>
-//         <button
-//           onClick={() => {
-//             navigation("/myevents");
-//           }}
-//         >
-//           My Events
-//         </button>
-//         <button
-//           onClick={() => {
-//             navigation("/create");
-//           }}
-//         >
-//           Add Event
-//         </button>
-//         <button
-//           onClick={() => {
-//             setUser({});
-//             localStorage.removeItem("userId");
-//             navigation("/");
-//           }}
-//         >
-//           Signout
-//         </button>
-//       </nav>
-//     </div>
-//   );
-// };
-
-// export default Header;
 import "../../components/cssFiles/Header.css";
 import { useNavigate } from "react-router-dom";
 
@@ -122,8 +50,11 @@ const Header = (props) => {
             <button
               className='btn-header'
               onClick={() => {
+                ///if not other option to load the page then keep this
+                window.location.reload();
                 setUser({});
                 localStorage.removeItem("userId");
+
                 navigation("/");
               }}
             >
