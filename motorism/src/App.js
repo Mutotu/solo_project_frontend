@@ -1,36 +1,3 @@
-// import "./App.css";
-// import { Routes, Route, Navigate } from "react-router-dom";
-// import Header from "./components/jsFiles/Header";
-// import CreateEventPage from "./pages/CreateEventPage";
-// import HomePage from "./pages/HomePage";
-// import SigninPage from "./pages/SigninPage";
-// import SignupPage from "./pages/SignupPage";
-
-// import AllEventsPage from "./pages/AllEventsPage";
-// import MyEvents from "./pages/MyEvents";
-// import { AppContext } from "./context/AppContext";
-// import { useContext, useEffect } from "react";
-
-// function App() {
-//   const { userState } = useContext(AppContext);
-//   const [user, setUser] = userState;
-//   return (
-//     <div className='App'>
-//       <Header />
-//       <Routes>
-//         <Route path='/' element={<HomePage />} />
-//         <Route path='/signin' element={<SigninPage />} />
-//         <Route path='/signup' element={<SignupPage />} />
-//         <Route path='/create' element={<CreateEventPage />} />
-//         <Route path='/allevents' element={<AllEventsPage />} />
-//         <Route path='/myevents' element={<MyEvents />} />
-//       </Routes>
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/jsFiles/Header";
@@ -57,7 +24,7 @@ function App() {
           Authorization: userId,
         },
       });
-      console.log(response.data.user);
+
       setUser(response.data.verfiedUser);
     }
   };
@@ -68,26 +35,7 @@ function App() {
   return (
     <div className='App'>
       <Header />
-      {/* <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route
-          path='/signin'
-          element={user ? <Navigate to='/signin' /> : <SigninPage />}
-        />
-        <Route path='/signup' element={<SignupPage />} />
-        <Route
-          path='/create'
-          element={user ? <Navigate to='/create' /> : <SigninPage />}
-        />
-        <Route
-          path='/allevents'
-          element={user ? <Navigate to='/allevents' /> : <SigninPage />}
-        />
-        <Route
-          path='/myevents'
-          element={user ? <Navigate to='/myevents' /> : <SigninPage />}
-        />
-      </Routes> */}
+
       <Routes>
         <Route path='/' element={<HomePage />} />
 

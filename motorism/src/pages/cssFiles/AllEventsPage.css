@@ -1,4 +1,6 @@
 .header {
   margin: 20px;
   font-size: 30px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: rgb(187, 228, 76);
 }

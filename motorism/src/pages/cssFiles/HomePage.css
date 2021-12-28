@@ -21,9 +21,10 @@
   left: 0;
   bottom: 0;
   right: 0;
-  position: absolute;
+  position: fixed;
   z-index: -1;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .userAddEvent {
@@ -43,6 +44,7 @@
 
 .h1 {
   margin: auto;
+
   border-top: 5px gray solid;
   border-left: 5px gray solid;
   border-right: 5px gray solid;
@@ -60,4 +62,13 @@
 
 .display {
   margin-right: 63rem;
+}
+
+.delete-button {
+  margin-bottom: 10px;
+}
+
+.delete-button:hover {
+  background-color: rgb(241, 50, 50);
+  font-weight: bolder;
 }

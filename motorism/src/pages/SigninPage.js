@@ -39,7 +39,7 @@ const SigninPage = (props) => {
     } else {
       console.log("user not found");
     }
-    console.log(response);
+    // console.log(response);
   }
   return (
     <div>

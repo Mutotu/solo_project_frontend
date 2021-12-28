@@ -56,7 +56,17 @@ const HomePage = (props) => {
       setDisplay(false);
     }
   };
-
+  const deleteMyevet = async (eventId) => {
+    return await axios.delete(
+      `${env.BACKEND_URL}/events/deleteMyEvent/${eventId}`,
+      {
+        headers: {
+          "content-type": "application/JSON",
+          Authorization: localStorage.getItem("userId"),
+        },
+      }
+    );
+  };
   const displayUserAddEvents = () => {
     return userAddEvent.map((ev, i) => {
       return (
@@ -68,6 +78,14 @@ const HomePage = (props) => {
             <h5>Which state: {ev.state}</h5>
             <h5>When: {ev.date}</h5>
             <h5>Details: {ev.details}</h5>
+            <button
+              className='delete-button'
+              onClick={() => {
+                deleteMyevet(ev.id);
+              }}
+            >
+              Delete{" "}
+            </button>
           </div>
         </div>
       );
