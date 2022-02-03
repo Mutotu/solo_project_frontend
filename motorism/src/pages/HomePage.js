@@ -32,6 +32,7 @@ const HomePage = (props) => {
         }
       );
       setUserAddEvent(events.data.events);
+      setBool(false);
     }
   };
 
@@ -57,7 +58,7 @@ const HomePage = (props) => {
     }
   };
   const deleteMyevet = async (eventId) => {
-    return await axios.delete(
+    const deleted = await axios.delete(
       `${env.BACKEND_URL}/events/deleteMyEvent/${eventId}`,
       {
         headers: {
@@ -66,6 +67,7 @@ const HomePage = (props) => {
         },
       }
     );
+    setBool(true);
   };
   const displayUserAddEvents = () => {
     return userAddEvent.map((ev, i) => {
@@ -84,7 +86,7 @@ const HomePage = (props) => {
                 deleteMyevet(ev.id);
               }}
             >
-              Delete{" "}
+              Delete
             </button>
           </div>
         </div>
@@ -151,7 +153,8 @@ const HomePage = (props) => {
   }, [updatePhoto]);
   useEffect(() => {
     getUserCreatedEvents();
-  }, []);
+  }, [bool]);
+
   return (
     <>
       <div>{user.id ? displayUser() : <h2>Signin/Signup</h2>}</div>
